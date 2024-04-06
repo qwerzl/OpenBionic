@@ -4,6 +4,10 @@ import {textVide} from "text-vide";
 import {Textarea} from "~/components/ui/textarea";
 
 const inputed = ref('')
+
+const props = defineProps<{
+  config: Config
+}>()
 </script>
 
 <template>
@@ -14,7 +18,12 @@ const inputed = ref('')
       </div>
       <div class="grid grid-rows-2 lg:grid-cols-2 lg:grid-rows-1 gap-4 mt-2">
         <Textarea placeholder="Type your message here." v-model="inputed" class="h-48" />
-        <div class="rounded border p-2" v-html="textVide(inputed, { ignoreHtmlTag: false })" />
+        <div class="rounded border p-2"
+             v-html="textVide(inputed, {
+               ignoreHtmlTag: false,
+               fixationPoint: props.config.fixation[0]
+             })"
+        />
       </div>
     </div>
   </div>
