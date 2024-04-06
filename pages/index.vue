@@ -33,11 +33,15 @@ import {Slider} from "~/components/ui/slider";
 const { toast } = useToast()
 
 const config = ref<Config>({
-  fixation: [3]
+  fixation: [3],
+  opacityDefault: [100],
+  opacityHighlighted: [100],
 })
 
 const configSchema = toTypedSchema(z.object({
-  fixation: z.array(z.number()).default(config.value.fixation)
+  fixation: z.array(z.number()).length(1).default(config.value.fixation),
+  opacityDefault: z.array(z.number()).length(1).default(config.value.opacityDefault),
+  opacityHighlighted: z.array(z.number()).length(1).default(config.value.opacityHighlighted),
 }))
 
 const { handleSubmit } = useForm({
@@ -91,7 +95,7 @@ const onSubmit = handleSubmit((values) => {
       <form class="space-y-6" @submit="onSubmit">
         <FormField v-slot="{ componentField, value }" name="fixation">
           <FormItem>
-            <FormLabel>Fixation</FormLabel>
+            <FormLabel>Fixation Level</FormLabel>
             <FormControl>
               <Slider
                   v-bind="componentField"
@@ -104,6 +108,49 @@ const onSubmit = handleSubmit((values) => {
             <FormDescription class="flex justify-between">
               <span>How much boldness would you like?</span>
               <span>Level {{ value?.[0] ?? config.fixation[0] }}</span>
+            </FormDescription>
+            <FormMessage />
+          </FormItem>
+        </FormField>
+
+        <hr />
+        <FormField v-slot="{ componentField, value }" name="opacityHighlighted">
+          <FormItem>
+            <div class="font-bold mb-4">
+              Opacity
+            </div>
+            <FormLabel>Highlighted</FormLabel>
+            <FormControl>
+              <Slider
+                  v-bind="componentField"
+                  :default-value="config.opacityHighlighted"
+                  :max="100"
+                  :min="1"
+                  :step="1"
+              />
+            </FormControl>
+            <FormDescription class="flex justify-between">
+              <span>Choose an opacity.</span>
+              <span>{{ value?.[0] ?? config.opacityHighlighted[0] }}%</span>
+            </FormDescription>
+            <FormMessage />
+          </FormItem>
+        </FormField>
+        <FormField v-slot="{ componentField, value }" name="opacityDefault">
+          <FormItem>
+            <FormLabel>Default</FormLabel>
+            <FormControl>
+              <Slider
+                  v-bind="componentField"
+                  :default-value="config.opacityDefault"
+                  :max="100"
+                  :min="1"
+                  :step="1"
+              />
+            </FormControl>
+            <FormDescription class="flex justify-between">
+              <span>Choose an opacity.</span>
+              <span>{{ value?.[0] ?? config.opacityDefault[0] }}%</span>
             </FormDescription>
             <FormMessage />
           </FormItem>
