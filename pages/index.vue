@@ -78,10 +78,10 @@ const onSubmit = handleSubmit((values) => {
           </DialogTrigger>
         </div>
         <TabsContent value="text">
-          <TransformersText :config="config"/>
+          <TransformersText :config="config" />
         </TabsContent>
         <TabsContent value="file">
-          <TransformersFile />
+          <TransformersFile :config="config" />
         </TabsContent>
       </Tabs>
     </div>
