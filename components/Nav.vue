@@ -3,8 +3,8 @@
 </script>
 
 <template>
-<div class="w-screen border-b p-4">
-  <div class="text-3xl">
+<div class="w-screen border-b px-6 py-4">
+  <div class="text-2xl">
     <b>Op</b>en<b>Bi</b>onic
   </div>
 </div>
