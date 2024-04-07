@@ -1,4 +1,7 @@
 <script setup lang="ts">
+import { useForm } from 'vee-validate'
+import { toTypedSchema } from '@vee-validate/zod'
+import { z } from 'zod'
 import {
   Tabs,
   TabsContent,
@@ -15,8 +18,6 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '@/components/ui/dialog'
-import {useForm} from "vee-validate";
-import {toTypedSchema} from "@vee-validate/zod";
 import {
   FormControl,
   FormDescription,
@@ -27,8 +28,7 @@ import {
 } from '@/components/ui/form'
 import { useToast } from '@/components/ui/toast/use-toast'
 
-import {z} from "zod";
-import {Slider} from "~/components/ui/slider";
+import { Slider } from '~/components/ui/slider'
 
 const { toast } = useToast()
 
@@ -50,7 +50,6 @@ const { handleSubmit } = useForm({
 
 const onSubmit = handleSubmit((values) => {
   config.value = values
-  console.log(values)
   toast({
     description: 'Configuration saved!',
   })
@@ -98,11 +97,11 @@ const onSubmit = handleSubmit((values) => {
             <FormLabel>Fixation Level</FormLabel>
             <FormControl>
               <Slider
-                  v-bind="componentField"
-                  :default-value="config.fixation"
-                  :max="5"
-                  :min="1"
-                  :step="1"
+                v-bind="componentField"
+                :default-value="config.fixation"
+                :max="5"
+                :min="1"
+                :step="1"
               />
             </FormControl>
             <FormDescription class="flex justify-between">
@@ -113,7 +112,7 @@ const onSubmit = handleSubmit((values) => {
           </FormItem>
         </FormField>
 
-        <hr />
+        <hr>
         <FormField v-slot="{ componentField, value }" name="opacityHighlighted">
           <FormItem>
             <div class="font-bold mb-4">
@@ -122,11 +121,11 @@ const onSubmit = handleSubmit((values) => {
             <FormLabel>Highlighted</FormLabel>
             <FormControl>
               <Slider
-                  v-bind="componentField"
-                  :default-value="config.opacityHighlighted"
-                  :max="100"
-                  :min="1"
-                  :step="1"
+                v-bind="componentField"
+                :default-value="config.opacityHighlighted"
+                :max="100"
+                :min="1"
+                :step="1"
               />
             </FormControl>
             <FormDescription class="flex justify-between">
@@ -141,11 +140,11 @@ const onSubmit = handleSubmit((values) => {
             <FormLabel>Default</FormLabel>
             <FormControl>
               <Slider
-                  v-bind="componentField"
-                  :default-value="config.opacityDefault"
-                  :max="100"
-                  :min="1"
-                  :step="1"
+                v-bind="componentField"
+                :default-value="config.opacityDefault"
+                :max="100"
+                :min="1"
+                :step="1"
               />
             </FormControl>
             <FormDescription class="flex justify-between">
