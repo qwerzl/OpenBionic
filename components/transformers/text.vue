@@ -27,7 +27,7 @@ const transformed = computed(() => {
       <div class="grid grid-rows-2 lg:grid-cols-2 lg:grid-rows-1 gap-4 mt-2">
         <Textarea placeholder="Type your message here." v-model="inputed" class="h-48" />
         <div class="rounded border p-2"
-             v-html='transformed'
+             v-html='transformed.replaceAll("\n", "<br />")'
              :style="`color: hsl(var(--foreground) / ${config.opacityDefault[0]}%);`"
         />
       </div>
