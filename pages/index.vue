@@ -27,8 +27,11 @@ import {
   FormMessage,
 } from '@/components/ui/form'
 import { useToast } from '@/components/ui/toast/use-toast'
-
 import { Slider } from '~/components/ui/slider'
+
+useHead({
+  title: 'OpenBionic',
+})
 
 const { toast } = useToast()
 
