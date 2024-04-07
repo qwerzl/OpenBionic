@@ -19,7 +19,7 @@ export default async function epub(f: FileList, config: Config) {
 
   for (const item of content.getElementsByTagName('item')) {
     const path = dirname(contentPath)+"/"+item.getAttribute('href')!
-    if (path.endsWith('.html')) {
+    if (path.endsWith('.html') || path.endsWith('.xhtml')) {
       const html = await zip.file(path)!.async('string')
       const processedHtml = textVide(html, { fixationPoint: config.fixation[0] })
       zip.file(path, processedHtml)
