@@ -11,9 +11,25 @@ const file = ref()
 
 const transforming = ref(false)
 
+import { useToast } from '@/components/ui/toast/use-toast'
+
+const { toast } = useToast()
+
+const transformerMap = new Map<string, Function>([
+  ['application/epub+zip', epub],
+])
+
 const handleFileUpload = async() => {
   transforming.value = true
-  await epub(file.value!.files, props.config)
+  const fileType = file.value!.files[0].type
+  if (transformerMap.has(fileType)) {
+    await transformerMap.get(fileType)!(file.value!.files, props.config)
+  } else {
+    toast({
+      description: 'Unsupported file type',
+      variant: 'destructive'
+    })
+  }
   transforming.value = false
 }
 </script>
@@ -26,7 +42,7 @@ const handleFileUpload = async() => {
     </CardHeader>
     <CardContent>
       <div class="flex items-center">
-        <Icon name="svg-spinners:90-ring-with-bg" v-if="transforming" />
+        <Icon name="svg-spinners:90-ring-with-bg" class="mr-2" v-if="transforming" />
         <input
           @change="handleFileUpload"
           :disabled="transforming"
